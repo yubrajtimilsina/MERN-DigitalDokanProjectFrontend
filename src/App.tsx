@@ -1,14 +1,23 @@
 
 
 import './App.css'
+import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import Register from './pages/user/Register'
+import { Provider } from 'react-redux'
+import store from './store/store'
 
 function App() {
 
 
   return (
-    <>
-     <h1 className='text-blue-300'>Hellow World</h1>
-    </>
+    <Provider store={store}>
+      <BrowserRouter>
+      <Routes>
+    <Route path='/register' element={<Register />}/>
+     </Routes>
+    </BrowserRouter>
+    </Provider>
+  
   )
 }
 
