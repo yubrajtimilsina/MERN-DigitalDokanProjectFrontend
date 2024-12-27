@@ -2,7 +2,7 @@
 
 function Register(){
     return (
-        <h1>Register page</h1>
+        <h1>Register page haii ta </h1>
     )
 }
 export default Register
