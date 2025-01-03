@@ -7,20 +7,18 @@ const userInfo :User = {
     age : 22
 }
 
-const userSlice =createSlice({
-    name : "user",
-    initialState : userInfo,
+const userSlice = createSlice({
+    name : "user", 
+    initialState : userInfo, 
     reducers : {
-        setName(state:User,action:PayloadAction<User>){
-            state.name = "hahahehe"
-        },
-        setAge(state:User,action:PayloadAction<User>){
-            state.age =12
+        setName(state:User,action:PayloadAction<string>){
+            state.name = action.payload // Hari bahadur
+        }, 
+        setAge(state:User,action:PayloadAction<number>){
+            state.age = action.payload // 100
         }
     }
 })
-
-//Action 
+// actions 
 export const {setName,setAge} = userSlice.actions
-
 export default userSlice.reducer
