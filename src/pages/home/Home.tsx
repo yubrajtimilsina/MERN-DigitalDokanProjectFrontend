@@ -10,8 +10,8 @@ function Home(){
       <div className="container mx-auto px-8 lg:flex">
         <div className="text-center lg:text-left lg:w-1/2">
           <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-none">Hamro Digital Dokan...</h1>
-          <p className="text-xl lg:text-2xl mt-6 font-light">Visit our store to buy your
-            any needed materials, products ,goods...
+          <p className="text-xl lg:text-2xl mt-6 font-light">"Visit Hamro Digital Dokan to buy your needed materials, products, and goods. Experience quality and convenience like never before!"
+
           </p>
           <p className="mt-8 md:mt-12">
             <button type="button" className=" py-4 px-12 bg-teal-500 hover:bg-teal-600 rounded text-white">Get Started</button>
@@ -19,6 +19,7 @@ function Home(){
           <p className="mt-4 text-gray-600">We provides quality products.
           </p>
         </div>
+        
         <div className="lg:w-1/2">
           <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xlinkHref="http://www.w3.org/1999/xlink" viewBox="0 0 1167.52 754.06">
             <defs>
@@ -190,7 +191,8 @@ function Home(){
             <path d="M248.47 597.35a.91.91 0 01.39.2 2.39 2.39 0 01.67 2.78.87.87 0 00-.1.31.76.76 0 00.19.44 1.6 1.6 0 01.17 1.79c-.16.22-.43.37-.52.64-.15.45.31.88.36 1.35.06.63-.59 1.09-1.18 1.31a1.54 1.54 0 01-1.42 0 1.16 1.16 0 01-.28-1.22 3.42 3.42 0 01.7-1.11 1.42 1.42 0 01-1.59-.93 2 2 0 01.39-1.88.73.73 0 00.23-.44c0-.22-.22-.37-.41-.49-.81-.53-1.75-2.09-.54-2.75a3.3 3.3 0 011.35-.25c.36 0 .4.23.69.31s.59-.11.9-.06z" fill="#a1616a" />
             <path d="M224.23 553.03a2.3 2.3 0 011.94.47 5.2 5.2 0 011.26 2.17 20.8 20.8 0 004.47 6.82M222.26 555.47a2.74 2.74 0 012.59.85 7.9 7.9 0 011.1 2.19 13.06 13.06 0 003.39 4.36" opacity=".1" />
           </svg>
-        </div>
+        </div> 
+
       </div>
     </section>
     <section id="features" className="py-20 lg:pb-40 lg:pt-48">
@@ -214,6 +216,7 @@ function Home(){
                 integer odio velna vitae auctor integer.
               </p>
             </div>
+
           </div>
           <div className="flex-1 px-3">
             <div className="p-12 rounded-lg border border-solid border-gray-200 mb-8" style={{boxShadow: '0 10px 28px rgba(0,0,0,.08)'}}>
@@ -544,16 +547,15 @@ function Home(){
         <div className="flex flex-col md:flex-row md:-mx-3">
           <div className="flex-1 px-3">
             <div className="p-12 rounded-lg border border-solid border-gray-200 mb-8" style={{boxShadow: '0 10px 28px rgba(0,0,0,.08)'}}>
-              <p className="text-xl font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing
+              <p className="text-xl font-semibold">"Fast and Convenient!"
               </p>
-              <p className="mt-6">Eu lobortis elementum nibh tellus molestie nunc non blandit massa.
-                Sit amet consectetur adipiscing elit duis.
+              <p className="mt-6">"Hamro Digital Dokan makes life so much easier. Their delivery is super fast, and I can find almost everything I need on their platform. Highly recommend giving them a try!"
               </p>
-              <div className="flex items-center mt-8"><img className="w-12 h-12 mr-4 rounded-full" src="https://placeimg.com/150/150/people" alt="Jane Doe" />
+              <div className="flex items-center mt-8"><img className="w-12 h-12 mr-4 rounded-full" src="https://placeimg.com/150/150/people" alt="Sita " />
                 <div>
-                  <p>Jane Doe
+                  <p>Sita Karki
                   </p>
-                  <p className="text-sm text-gray-600">Director of Research and Data
+                  <p className="text-sm text-gray-600">Teacher
                   </p>
                 </div>
               </div>
@@ -561,16 +563,15 @@ function Home(){
           </div>
           <div className="flex-1 px-3">
             <div className="p-12 rounded-lg border border-solid border-gray-200 mb-8" style={{boxShadow: '0 10px 28px rgba(0,0,0,.08)'}}>
-              <p className="text-xl font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing
+              <p className="text-xl font-semibold">"Excellent Customer Support!"
               </p>
-              <p className="mt-6">Eu lobortis elementum nibh tellus molestie nunc non blandit massa.
-                Sit amet consectetur adipiscing elit duis.
+              <p className="mt-6">"Their customer service team is so helpful! I had an issue with one of my orders, and they resolved it within minutes. A big thumbs up to the team at Hamro Digital Dokan."
               </p>
-              <div className="flex items-center mt-8"><img className="w-12 h-12 mr-4 rounded-full" src="https://placeimg.com/150/150/people" alt="John Doe" />
+              <div className="flex items-center mt-8"><img className="w-12 h-12 mr-4 rounded-full" src="https://placeimg.com/150/150/people" alt="Gita" />
                 <div>
-                  <p>John Doe
+                  <p>Gita Adhikari
                   </p>
-                  <p className="text-sm text-gray-600">Director of Research and Data
+                  <p className="text-sm text-gray-600"> Homemaker
                   </p>
                 </div>
               </div>
@@ -578,16 +579,15 @@ function Home(){
           </div>
           <div className="flex-1 px-3">
             <div className="p-12 rounded-lg border border-solid border-gray-200 mb-8" style={{boxShadow: '0 10px 28px rgba(0,0,0,.08)'}}>
-              <p className="text-xl font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing
+              <p className="text-xl font-semibold">"Exceptional Quality!"
               </p>
-              <p className="mt-6">Eu lobortis elementum nibh tellus molestie nunc non blandit massa.
-                Sit amet consectetur adipiscing elit duis.
+              <p className="mt-6">"Every product I’ve purchased from Hamro Digital Dokan has been top-notch. Their attention to detail and commitment to quality is remarkable. I trust them for all my shopping needs."
               </p>
-              <div className="flex items-center mt-8"><img className="w-12 h-12 mr-4 rounded-full" src="https://placeimg.com/150/150/people" alt="Jane Smith" />
+              <div className="flex items-center mt-8"><img className="w-12 h-12 mr-4 rounded-full" src="https://placeimg.com/150/150/people" alt="K.C" />
                 <div>
-                  <p>Jane Smith
+                  <p>Ramesh K.C
                   </p>
-                  <p className="text-sm text-gray-600">Director of Research and Data
+                  <p className="text-sm text-gray-600">Software Engineer
                   </p>
                 </div>
               </div>
@@ -612,7 +612,7 @@ function Home(){
     <div className="flex -mx-3">
       <div className="flex-1 px-3">
         <h2 className="text-lg font-semibold">About Us</h2>
-        <p className="mt-5">Ridiculus mus mauris vitae ultricies leo integer malesuada nunc.
+        <p className="mt-5">We are suited at the beautiful city pokhara.
         </p>
       </div>
       <div className="flex-1 px-3">
