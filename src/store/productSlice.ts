@@ -7,7 +7,8 @@ import API from "../http"
  
 const initialState:IProducts = {
     products : [], 
-    status : Status.LOADING
+    status : Status.LOADING,
+    product : null
   }
 
  
@@ -15,17 +16,20 @@ const initialState:IProducts = {
     name:"product", 
     initialState, 
     reducers : {
-        setProduct(state:IProducts,action:PayloadAction<IProduct[]>){
+        setProducts(state:IProducts,action:PayloadAction<IProduct[]>){
             state.products = action.payload
         }, 
         setStatus(state:IProducts,action:PayloadAction<Status>){
             state.status = action.payload
+        },
+        setProduct(state:IProducts,action:PayloadAction<IProduct>){
+            state.product = action.payload
         }
     }
 
 })
 
-export const {setStatus,setProduct} = productSlice.actions
+export const {setStatus,setProducts,setProduct} = productSlice.actions
 export default productSlice.reducer 
 
 
@@ -35,7 +39,24 @@ export function fetchProducts(){
             const response = await API.get("/product")
             if(response.status === 200){
                 dispatch(setStatus(Status.SUCCESS))
-                dispatch(setProduct(response.data.data))
+                dispatch(setProducts(response.data.data))
+            }else{
+                dispatch(setStatus(Status.ERROR))
+            }
+        } catch (error) {
+            console.log(error)
+            dispatch(setStatus(Status.ERROR))
+        }
+    }
+}
+
+export function fetchProduct(id:string){
+    return async function fetchProductThunk(dispatch:AppDispatch){
+        try {
+            const response = await API.get("/product/" + id)
+            if(response.status === 200){
+                dispatch(setStatus(Status.SUCCESS))
+                dispatch(setProduct(response.data.data.length > 0 && response.data.data[0]))
             }else{
                 dispatch(setStatus(Status.ERROR))
             }
