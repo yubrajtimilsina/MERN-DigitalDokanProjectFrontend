@@ -7,12 +7,12 @@ interface ICategory{
 
 export interface IProduct{
  id : string, 
- productName : string, 
+ productName: string, 
  productDescription : string, 
  productPrice : number, 
  productTotalStock : number, 
  discount : number, 
- productImageUrl : string, 
+ productImgUrl : string, 
  createdAt : string, 
  updatedAt : string, 
  categoryId : string, 

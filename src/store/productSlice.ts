@@ -22,11 +22,10 @@ const initialState:IProducts = {
         setStatus(state:IProducts,action:PayloadAction<Status>){
             state.status = action.payload
         },
-        setProduct(state:IProducts,action:PayloadAction<IProduct>){
-            state.product = action.payload
-        }
+        setProduct(state:IProducts,action:PayloadAction<IProduct[]>){
+            state.products = action.payload
+    },
     }
-
 })
 
 export const {setStatus,setProducts,setProduct} = productSlice.actions
