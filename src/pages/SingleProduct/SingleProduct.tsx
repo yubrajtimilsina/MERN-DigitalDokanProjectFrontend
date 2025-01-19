@@ -13,7 +13,9 @@ function SingleProduct(){
     useEffect(()=>{
        id && dispatch(fetchProduct(id))
     },[])
+    console.log(product)
     return (
+
         <>
         <Navbar />
 

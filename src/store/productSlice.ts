@@ -22,8 +22,8 @@ const initialState:IProducts = {
         setStatus(state:IProducts,action:PayloadAction<Status>){
             state.status = action.payload
         },
-        setProduct(state:IProducts,action:PayloadAction<IProduct[]>){
-            state.products = action.payload
+        setProduct(state:IProducts,action:PayloadAction<IProduct>){
+            state.product = action.payload
     },
     }
 })
@@ -55,7 +55,7 @@ export function fetchProduct(id:string){
             const response = await API.get("/product/" + id)
             if(response.status === 200){
                 dispatch(setStatus(Status.SUCCESS))
-                dispatch(setProduct(response.data.data.length > 0 && response.data.data[0]))
+                dispatch(setProduct(response.data.data))
             }else{
                 dispatch(setStatus(Status.ERROR))
             }
