@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { IProduct, IProducts } from "../pages/Product/types"
 import { Status } from "../globals/types/type"
 import { AppDispatch } from "./store"
-import API from "../http"
+import { API } from "../http"
 import { RootState } from "@reduxjs/toolkit/query"
 
  
