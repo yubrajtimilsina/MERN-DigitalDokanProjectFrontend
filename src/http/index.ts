@@ -13,6 +13,6 @@ export const APIWITHTOKEN = axios.create({
     headers: {
         "Content-Type": "application/json", 
         "Accept": "application/json", 
-        "Authorization": localStorage.getItem("token") || "" // Ensure it's a string
+        "Authorization": localStorage.getItem("tokenHoYo") || "" // Ensure it's a string
     }
 });
