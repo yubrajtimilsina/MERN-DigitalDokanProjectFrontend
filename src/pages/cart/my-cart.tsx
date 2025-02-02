@@ -1,4 +1,5 @@
 import Navbar from "../../globals/components/Navbar";
+import { handleCartItemUpdate, handleCartItemDelete  } from "../../store/cartSlice";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 
 function MyCart() {
@@ -10,6 +11,13 @@ function MyCart() {
     const handleUpdate = (productId:string,quantity:number)=>{
         dispatch(handleCartItemUpdate(productId,quantity))
     }
+    const handleDelete = (productId:string)=>{
+      dispatch(handleCartItemDelete(productId))
+  }
+  const subTotal = items.reduce((total,item)=>item.Product.productPrice * item.quantity + total,0)
+    const totalQtyInCarts = items.reduce((total,item)=>item.quantity + total, 0)
+    const shippingPrice = 100
+    const total = subTotal + shippingPrice
   return (
     <>
       <Navbar />
@@ -73,20 +81,20 @@ function MyCart() {
           <h2 className="text-lg font-semibold mb-4">Summary</h2>
           <div className="flex justify-between mb-2">
             <span>Subtotal</span>
-            <span>$19.99</span>
+            <span>Rs {subTotal}</span>
           </div>
           <div className="flex justify-between mb-2">
-            <span>Taxes</span>
-            <span>$1.99</span>
+            <span>Total Qty</span>
+            <span>{totalQtyInCarts}</span>
           </div>
           <div className="flex justify-between mb-2">
             <span>Shipping</span>
-            <span>$0.00</span>
+            <span>RS {shippingPrice}</span>
           </div>
           <hr className="my-2" />
           <div className="flex justify-between mb-2">
             <span className="font-semibold">Total</span>
-            <span className="font-semibold">$21.98</span>
+            <span className="font-semibold">Rs {total}</span>
           </div>
           <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
         </div>

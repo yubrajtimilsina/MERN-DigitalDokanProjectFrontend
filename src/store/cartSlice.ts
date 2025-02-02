@@ -90,3 +90,21 @@ export function handleCartItemUpdate(productId:string,quantity : number){
         }
     }
 }
+
+
+export function handleCartItemDelete(productId:string){
+    return async function handleCartItemDeleteThunk(dispatch:AppDispatch){
+        try {
+            const response = await APIWITHTOKEN.delete("/cart/" + productId)
+            if(response.status === 200){
+                dispatch(setDeleteCartItem(productId))
+                dispatch(setStatus(Status.SUCCESS))
+            }else{
+                dispatch(setStatus(Status.ERROR))
+            }
+        } catch (error) {
+            console.log(error)
+            dispatch(setStatus(Status.ERROR))
+        }
+    }
+}
