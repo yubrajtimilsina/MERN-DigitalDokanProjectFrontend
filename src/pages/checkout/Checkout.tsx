@@ -1,5 +1,8 @@
+import { useState,ChangeEvent,FormEvent } from "react"
 import Navbar from "../../globals/components/Navbar"
 import { useAppSelector, useAppDispatch } from "../../store/hooks"
+import { IData, PaymentMethod } from "./types"
+import { orderItem } from "../../store/checkoutSlice"
 
 function Checkout(){
     const dispatch = useAppDispatch()
@@ -7,6 +10,45 @@ function Checkout(){
     console.log(items)
 
     const total = items.reduce((total,item)=>item.Product.productPrice * item.quantity + total,0)
+    const [data,setData] = useState<IData>({
+      firstName : "", 
+        lastName : "", 
+        addressLine : "", 
+        city : "", 
+        totalAmount : 0, 
+        zipCode : "", 
+        email : "", 
+        phoneNumber : "", 
+        state : "", 
+        paymentMethod : PaymentMethod.Cod, 
+        products : []
+    })
+    const handleChange = (e:ChangeEvent<HTMLInputElement>)=>{
+      const {name,value} =  e.target
+      setData({
+          ...data, 
+          [name] : value
+      })
+  }
+
+  const handleSubmit = async (e:FormEvent<HTMLFormElement>)=>{
+    e.preventDefault()
+    const productData =  items.length > 0 ? items.map((item)=>{
+        return {
+            productId : item.Product.id, 
+            productQty : item.quantity
+        }
+    }) : []
+    const finalData = {
+        ...data, 
+        products : productData, 
+        totalAmount : total
+    }
+    await dispatch(orderItem(finalData))
+
+}
+
+
     return(
         <>
         <Navbar />
@@ -47,21 +89,21 @@ function Checkout(){
     </div>
     <div className="max-w-4xl w-full h-max rounded-md px-4 py-8 sticky top-0">
       <h2 className="text-2xl font-bold text-gray-800">Complete your order</h2>
-      <form className="mt-8">
+      <form className="mt-8" onSubmit={handleSubmit}>
         <div>
           <h3 className="text-sm lg:text-base text-gray-800 mb-4">Personal Details</h3>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <input type="text" placeholder="First Name" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
+              <input type="text" name="firstName" onChange={handleChange} placeholder="First Name" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
             </div>
             <div>
-              <input type="text" placeholder="Last Name" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
+              <input type="text" name="lastName" onChange={handleChange} placeholder="Last Name" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
             </div>
             <div>
-              <input type="email" placeholder="Email" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
+              <input type="email" name="email" onChange={handleChange} placeholder="Email" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
             </div>
             <div>
-              <input type="number" placeholder="Phone No." className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
+              <input type="number" name="phoneNumber" onChange={handleChange} placeholder="Phone No." className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
             </div>
           </div>
         </div>
@@ -69,21 +111,20 @@ function Checkout(){
           <h3 className="text-sm lg:text-base text-gray-800 mb-4">Shipping Address</h3>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <input type="text" placeholder="Address Line" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
+              <input type="text" name="addressLine" onChange={handleChange} placeholder="Address Line" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
             </div>
             <div>
-              <input type="text" placeholder="City" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
+              <input type="text" name="city" onChange={handleChange} placeholder="City" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
             </div>
             <div>
-              <input type="text" placeholder="State" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
+              <input type="text" name="state" onChange={handleChange} placeholder="State" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
             </div>
             <div>
-              <input type="text" placeholder="Zip Code" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
+              <input type="text" name="zipCode" onChange={handleChange} placeholder="Zip Code" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
             </div>
           </div>
           <div className="flex gap-4 max-md:flex-col mt-8">
-            <button type="button" className="rounded-md px-4 py-2.5 w-full text-sm tracking-wide bg-transparent hover:bg-gray-100 border border-gray-300 text-gray-800 max-md:order-1">Cancel</button>
-            <button type="button" className="rounded-md px-4 py-2.5 w-full text-sm tracking-wide bg-blue-600 hover:bg-blue-700 text-white">Complete Purchase</button>
+            <button type="submit" className="rounded-md px-4 py-2.5 w-full text-sm tracking-wide bg-blue-600 hover:bg-blue-700 text-white">Complete Purchase</button>
           </div>
         </div>
       </form>
