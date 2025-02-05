@@ -51,3 +51,21 @@ export function orderItem(data:IData){
         }
     }
 }
+
+export function fetchMyOrders(){
+    return async function fetchMyOrdersThunk(dispatch:AppDispatch){
+        try {
+            const response =  await APIWITHTOKEN.get("/order")
+            if(response.status === 200){
+                dispatch(setStatus(Status.SUCCESS))
+                dispatch(setItems(response.data.data))
+            }else{
+                dispatch(setStatus(Status.ERROR))
+            }
+        } catch (error) {
+            console.log(error)
+            dispatch(setStatus(Status.ERROR))
+            
+        }
+    }
+}

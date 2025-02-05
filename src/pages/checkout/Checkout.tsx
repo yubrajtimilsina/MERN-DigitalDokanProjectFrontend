@@ -1,13 +1,14 @@
-import { useState,ChangeEvent,FormEvent } from "react"
+import { useState,ChangeEvent,FormEvent,useEffect } from "react"
 import Navbar from "../../globals/components/Navbar"
 import { useAppSelector, useAppDispatch } from "../../store/hooks"
 import { IData, PaymentMethod } from "./types"
 import { orderItem } from "../../store/checkoutSlice"
+import { Status } from "../../globals/types/type"
 
 function Checkout(){
     const dispatch = useAppDispatch()
     const {items} =  useAppSelector((store)=>store.cart)
-    console.log(items)
+    const {khaltiUrl} =  useAppSelector((store)=>store.orders)
 
     const total = items.reduce((total,item)=>item.Product.productPrice * item.quantity + total,0)
     const [data,setData] = useState<IData>({
@@ -23,6 +24,15 @@ function Checkout(){
         paymentMethod : PaymentMethod.Cod, 
         products : []
     })
+    const [paymentMethod,setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.Cod)
+    const handlePaymentMethod = (paymentData:PaymentMethod)=>{
+      setPaymentMethod(paymentData)
+      setData({
+        ...data, 
+        paymentMethod : paymentData
+      })
+    }
+
     const handleChange = (e:ChangeEvent<HTMLInputElement>)=>{
       const {name,value} =  e.target
       setData({
@@ -48,6 +58,14 @@ function Checkout(){
 
 }
 
+useEffect(()=>{
+  console.log(khaltiUrl)
+  if(khaltiUrl){
+    window.location.href = khaltiUrl
+    return; 
+  }
+},[khaltiUrl,status])
+console.log(khaltiUrl)
 
     return(
         <>
@@ -122,9 +140,32 @@ function Checkout(){
             <div>
               <input type="text" name="zipCode" onChange={handleChange} placeholder="Zip Code" className="px-4 py-3 bg-gray-100 focus:bg-transparent text-gray-800 w-full text-sm rounded-md focus:outline-blue-600" />
             </div>
+            <div >
+              <label htmlFor= "paymentMethod" >Payment Method:</label>
+              <select name="" id="paymentMethod" onChange={(e)=>handlePaymentMethod(e.target.value as PaymentMethod)}>
+
+                <option value={PaymentMethod.Esewa} id="">Esewa</option>
+                <option value={PaymentMethod.Khalti} id="">Khalti</option>
+                <option value={PaymentMethod.Cod} id="">COD</option>
+              </select>
+            </div>
           </div>
           <div className="flex gap-4 max-md:flex-col mt-8">
-            <button type="submit" className="rounded-md px-4 py-2.5 w-full text-sm tracking-wide bg-blue-600 hover:bg-blue-700 text-white">Complete Purchase</button>
+          {
+              paymentMethod=== PaymentMethod.Cod && (
+                <button type="submit" className="rounded-md px-4 py-2.5 w-full text-sm tracking-wide bg-blue-600 hover:bg-blue-700 text-white">Pay on COD</button>
+              )
+            }
+            {
+              paymentMethod === PaymentMethod.Khalti && (
+                <button type="submit" className="rounded-md px-4 py-2.5 w-full text-sm tracking-wide bg-purple-600 hover:bg-purple-700 text-white">Pay with Khalti</button>
+              )
+            }
+              {
+              paymentMethod === PaymentMethod.Esewa && (
+                <button type="submit" className="rounded-md px-4 py-2.5 w-full text-sm tracking-wide bg-green-600 hover:bg-green-700 text-white">Pay with Esewa</button>
+              )
+            }
           </div>
         </div>
       </form>
