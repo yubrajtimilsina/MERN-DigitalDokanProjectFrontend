@@ -2,7 +2,8 @@ import { useParams } from "react-router-dom";
 import Navbar from "../../globals/components/Navbar";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useEffect } from "react";
-import { fetchMyOrderDetails } from "../../store/checkoutSlice";
+import { cancelOrderAPI, fetchMyOrderDetails } from "../../store/checkoutSlice";
+import { OrderStatus } from "./types";
 
 
 
@@ -24,6 +25,11 @@ function MyOrderDetail() {
         return <p>Loading order details...</p>;
     }
 
+    const cancelOrder = ()=>{
+      if(id){
+        dispatch(cancelOrderAPI(id) )
+      }
+    } 
     return (
             <>
         <Navbar />
@@ -116,7 +122,11 @@ function MyOrderDetail() {
             
           </div>
           <div className="flex w-full justify-center items-center md:justify-start md:items-start">
-            <button className="mt-6 md:mt-0 dark:border-white dark:hover:bg-gray-900 dark:bg-transparent dark:text-white py-5 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 border border-gray-800 font-medium w-96 2xl:w-full text-base font-medium leading-4 text-gray-800">Edit Details</button>
+          {
+            orderDetails[0]?.Order?.orderStatus !== OrderStatus?.Cancelled && (
+              <button onClick={cancelOrder} className="mt-6 md:mt-0 dark:border-white dark:hover:bg-gray-900 dark:bg-transparent dark:text-white py-5 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 border border-gray-800 font-medium w-96 2xl:w-full text-base font-medium leading-4 text-gray-800">Cancel Order</button>
+            )
+           }
           </div>
         </div>
       </div>
