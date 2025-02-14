@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./authSlice";
 import productSlice from "./productSlice"
 import checkoutSlice from "./checkoutSlice"
+import adminCategorySlice from "./adminCategorySlice";
 
 import createSlice from "./cartSlice"
 const store =configureStore({
@@ -9,7 +10,8 @@ const store =configureStore({
         auth : authSlice,
         products : productSlice,
         cart : createSlice,
-        orders : checkoutSlice
+        orders : checkoutSlice,
+        categories : adminCategorySlice
     }
 })
 
