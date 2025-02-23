@@ -3,6 +3,7 @@ import authSlice from "./authSlice";
 import productSlice from "./productSlice"
 import checkoutSlice from "./checkoutSlice"
 import adminCategorySlice from "./adminCategorySlice";
+import adminUserSlice from "./adminUserSlice"
 
 import createSlice from "./cartSlice"
 const store =configureStore({
@@ -11,7 +12,8 @@ const store =configureStore({
         products : productSlice,
         cart : createSlice,
         orders : checkoutSlice,
-        categories : adminCategorySlice
+        categories : adminCategorySlice,
+        users : adminUserSlice
     }
 })
 
