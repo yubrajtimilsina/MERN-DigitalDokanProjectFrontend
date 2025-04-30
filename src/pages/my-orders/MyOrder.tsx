@@ -1,8 +1,9 @@
 import Navbar from "../../globals/components/Navbar"
 import { useEffect, useState } from "react"
-import { fetchMyOrders } from "../../store/checkoutSlice"
+import { fetchMyOrders, updateOrderStatusinSlice } from "../../store/checkoutSlice"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { Link } from "react-router-dom"
+import { socket } from "../../App"
 
 function MyOrder(){
     const dispatch = useAppDispatch()
@@ -18,6 +19,14 @@ function MyOrder(){
     useEffect(()=>{
         dispatch(fetchMyOrders())
     },[])
+
+    useEffect(()=>{
+      socket.on("statusUpdated",(data:any)=>{
+        console.log(data,"Incoming data")
+        dispatch(updateOrderStatusinSlice(data))
+      } )
+    },[socket])
+
     return (
         <>
         <Navbar />
