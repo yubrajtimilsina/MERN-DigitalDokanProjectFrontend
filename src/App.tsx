@@ -22,6 +22,9 @@ import ProductDescription from './pages/admin/productDescription/ProductDescript
 import AdminOrder from './pages/admin/orders/AdminOrder'
 import AdminOrderDetail from './pages/admin/order-details/AdminOrderDetails'
 import { io } from 'socket.io-client'
+import AdminReviews from './pages/admin/reviews/AdminReviews'
+import MyReviews from './pages/user/my-reviews/MyReviews'
+
 export const socket = io("http://localhost:3000",{
   auth: {
     token : localStorage.getItem("tokenHoYo")
@@ -51,6 +54,8 @@ function App() {
     <Route path='/admin/orders' element={<AdminOrder />} />
     <Route path='/admin/products/:id' element={<ProductDescription />} />
     <Route path='/admin/orders/:id' element={<AdminOrderDetail />} />
+    <Route path='/my-reviews' element={<MyReviews />}/>
+    <Route path='/admin/reviews' element={<AdminReviews />} />
 
      </Routes>
     </BrowserRouter>

@@ -7,7 +7,9 @@ import adminUserSlice from "./adminUserSlice"
 import adminProductSlice from "./adminProductSlice"
 import adminOrderSlice from "./adminOrderSlice";
 
-import createSlice from "./cartSlice"
+import createSlice from "./cartSlice";
+import reviewSlice from './reviewSlice'
+
 const store =configureStore({
     reducer :{
         auth : authSlice,
@@ -18,6 +20,7 @@ const store =configureStore({
         users : adminUserSlice,
         adminProducts : adminProductSlice,
         adminOrders : adminOrderSlice,
+        reviews: reviewSlice,
     }
 })
 

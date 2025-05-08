@@ -4,21 +4,30 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { fetchProduct } from "../../store/productSlice"
 import { useParams } from "react-router-dom"
 import { addToCart } from "../../store/cartSlice"
+import StarRating from "../../globals/components/StarRating"
 
+import { fetchProductReviews } from "../../store/reviewSlice"
+import MyReviews from "../user/my-reviews/MyReviews"
  
 
 function SingleProduct(){
-    const {id} = useParams()
-    const {product} = useAppSelector((store)=>store.products)
-    const dispatch = useAppDispatch()
-    useEffect(()=>{
-       id && dispatch(fetchProduct(id))
-    },[])
-    const handleAddToCart = ()=>{
-      if(id){
+  const {id} = useParams()
+  const {product} = useAppSelector((store)=>store.products)
+  const {avgRating} = useAppSelector((store)=>store.reviews)
+  const dispatch = useAppDispatch()
+  
+  useEffect(()=>{
+     if(id) {
+       dispatch(fetchProduct(id))
+       dispatch(fetchProductReviews(id))
+     }
+  },[id, dispatch])
+  
+  const handleAddToCart = ()=>{
+    if(id){
       dispatch(addToCart(id))
-      }
     }
+  }
     return (
 
         <>
@@ -43,6 +52,14 @@ function SingleProduct(){
       <div className="md:flex-1 px-4">
         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{product?.productName}</h2>
         
+        <div className="flex items-center mb-4">
+          <StarRating rating={avgRating} />
+          <span className="ml-2 text-gray-600 dark:text-gray-400">
+            {avgRating > 0 ? `(${avgRating.toFixed(1)})` : 'No ratings yet'}
+          </span>
+        </div>
+        
+        
         <div className="flex mb-4">
           <div className="mr-4">
             <span className="font-bold text-gray-700 dark:text-gray-300">Price:</span>
@@ -64,6 +81,10 @@ function SingleProduct(){
            {product?.productDescription}
           </p>
         </div>
+        {/* Reviews Section */}
+    <div className="mt-10 border-t border-gray-200 pt-10">
+      {id && <MyReviews productId={id} />}
+    </div>
       </div>
     </div>
   </div>
